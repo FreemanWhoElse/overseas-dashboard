@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北京企业出海活动监控看板 | 2026 H2</title>
+<meta name="description" content="2026年下半年北京地区企业出海活动实时监控看板 — 覆盖北京市商务局、中关村管委会、北京CBD管委会、德勤、毕马威等关键来源">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== Design Tokens ===== */
+:root {
+  --text-xs: clamp(0.7rem, 0.68rem + 0.2vw, 0.8rem);
+  --text-sm: clamp(0.8rem, 0.76rem + 0.3vw, 0.9rem);
+  --text-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+  --text-lg: clamp(1.05rem, 0.98rem + 0.5vw, 1.25rem);
+  --text-xl: clamp(1.35rem, 1.15rem + 0.8vw, 1.75rem);
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+
+  --font-body: 'Noto Sans SC', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius-sm: 0.375rem; --radius-md: 0.5rem; --radius-lg: 0.75rem;
+  --transition: 180ms cubic-bezier(0.16,1,0.3,1);
+}
+
+/* Dark mode (primary) */
+[data-theme='dark'] {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-2: #1c2230;
+  --surface-3: #232b3d;
+  --border: #30363d;
+  --border-light: #21262d;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --text-faint: #484f58;
+  --accent: #2f81f7;
+  --accent-glow: rgba(47,129,247,0.15);
+  --green: #3fb950;
+  --green-bg: rgba(63,185,80,0.1);
+  --orange: #d29922;
+  --orange-bg: rgba(210,153,34,0.1);
+  --red: #f85149;
+  --red-bg: rgba(248,81,73,0.1);
+  --purple: #bc8cff;
+  --purple-bg: rgba(188,140,255,0.1);
+  --teal: #39d0d8;
+  --teal-bg: rgba(57,208,216,0.1);
+  --shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* Light mode */
+[data-theme='light'] {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --surface-3: #e2e8f0;
+  --border: #d0d7de;
+  --border-light: #e1e4e8;
+  --text: #1f2328;
+  --text-muted: #636c76;
+  --text-faint: #9da2a8;
+  --accent: #0969da;
+  --accent-glow: rgba(9,105,218,0.08);
+  --green: #1a7f37;
+  --green-bg: rgba(26,127,55,0.08);
+  --orange: #9a6700;
+  --orange-bg: rgba(154,103,0,0.08);
+  --red: #cf222e;
+  --red-bg: rgba(207,34,46,0.08);
+  --purple: #8250df;
+  --purple-bg: rgba(130,80,223,0.08);
+  --teal: #0a7b8b;
+  --teal-bg: rgba(10,123,139,0.08);
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; text-size-adjust: none; }
+body {
+  height: 100vh; overflow: hidden;
+  font-family: var(--font-body); font-size: var(--text-base);
+  color: var(--text); background: var(--bg); line-height: 1.6;
+}
+button { cursor: pointer; background: none; border: none; color: inherit; font: inherit; }
+a { color: var(--accent); text-decoration: none; transition: opacity var(--transition); }
+a:hover { opacity: 0.8; }
+
+/* ===== Layout ===== */
+.dashboard {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+}
+.header {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3) var(--space-6);
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  z-index: 20; gap: var(--space-4);
+}
+.sidebar {
+  grid-row: 2; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--surface); border-right: 1px solid var(--border);
+  padding: var(--space-4) var(--space-3); display: flex; flex-direction: column; gap: var(--space-4);
+}
+.main {
+  grid-column: 2; overflow-y: auto; overscroll-behavior: contain;
+  padding: var(--space-5) var(--space-6);
+}
+
+/* ===== Header ===== */
+.logo { display: flex; align-items: center; gap: var(--space-3); }
+.logo svg { flex-shrink: 0; }
+.logo-title { font-size: var(--text-base); font-weight: 600; white-space: nowrap; }
+.logo-sub { font-size: var(--text-xs); color: var(--text-muted); }
+.header-right { display: flex; align-items: center; gap: var(--space-4); }
+.live-badge {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); color: var(--green);
+  background: var(--green-bg); padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full); border: 1px solid var(--green);
+}
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.last-updated { font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono); }
+.theme-toggle {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-md); border: 1px solid var(--border);
+  background: var(--surface-2); transition: all var(--transition);
+}
+.theme-toggle:hover { border-color: var(--accent); background: var(--accent-glow); }
+
+/* ===== Sidebar ===== */
+.nav-section { display: flex; flex-direction: column; gap: var(--space-1); }
+.nav-label {
+  font-size: var(--text-xs); font-weight: 600; color: var(--text-faint);
+  text-transform: uppercase; letter-spacing: 0.08em; padding: var(--space-2) var(--space-3);
+}
+.nav-item {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-2) var(--space-3); border-radius: var(--radius-md);
+  font-size: var(--text-sm); color: var(--text-muted); transition: all var(--transition);
+  text-align: left; width: 100%;
+}
+.nav-item:hover { background: var(--surface-2); color: var(--text); }
+.nav-item.active { background: var(--accent-glow); color: var(--accent); font-weight: 500; }
+.nav-item svg { flex-shrink: 0; }
+.nav-count {
+  margin-left: auto; font-size: var(--text-xs); font-family: var(--font-mono);
+  background: var(--surface-3); padding: 1px 8px; border-radius: var(--radius-full);
+  color: var(--text-muted);
+}
+.nav-item.active .nav-count { background: var(--accent); color: white; }
+
+.source-list { display: flex; flex-direction: column; gap: var(--space-2); }
+.source-tag {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-xs); padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm); cursor: pointer;
+  transition: all var(--transition); width: fit-content;
+}
+
+/* ===== KPI Cards ===== */
+.kpi-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4); margin-bottom: var(--space-6);
+}
+.kpi-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: var(--space-4) var(--space-5);
+  position: relative; overflow: hidden;
+}
+.kpi-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+}
+.kpi-card.blue::before { background: var(--accent); }
+.kpi-card.green::before { background: var(--green); }
+.kpi-card.orange::before { background: var(--orange); }
+.kpi-card.purple::before { background: var(--purple); }
+.kpi-label { font-size: var(--text-xs); color: var(--text-muted); margin-bottom: var(--space-2); }
+.kpi-value { font-size: var(--text-xl); font-weight: 700; font-variant-numeric: tabular-nums; }
+.kpi-meta { font-size: var(--text-xs); color: var(--text-faint); margin-top: var(--space-1); }
+
+/* ===== Filters ===== */
+.filter-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3);
+  margin-bottom: var(--space-5); padding: var(--space-3) var(--space-4);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.filter-group { display: flex; align-items: center; gap: var(--space-2); }
+.filter-label { font-size: var(--text-xs); color: var(--text-muted); font-weight: 500; }
+.chip {
+  display: inline-flex; align-items: center; gap: var(--space-1);
+  font-size: var(--text-xs); padding: 3px 10px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--surface-2);
+  color: var(--text-muted); cursor: pointer; transition: all var(--transition);
+  white-space: nowrap;
+}
+.chip:hover { border-color: var(--accent); }
+.chip.active { background: var(--accent); color: white; border-color: var(--accent); }
+.search-input {
+  flex: 1; min-width: 120px; padding: var(--space-2) var(--space-3);
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius-md); color: var(--text); font-size: var(--text-sm);
+  outline: none; transition: border-color var(--transition);
+}
+.search-input:focus { border-color: var(--accent); }
+.search-input::placeholder { color: var(--text-faint); }
+
+/* ===== Month Tabs ===== */
+.month-tabs {
+  display: flex; gap: var(--space-1); margin-bottom: var(--space-5);
+  border-bottom: 1px solid var(--border); overflow-x: auto;
+}
+.month-tab {
+  padding: var(--space-2) var(--space-4); font-size: var(--text-sm);
+  color: var(--text-muted); border-bottom: 2px solid transparent;
+  transition: all var(--transition); white-space: nowrap; position: relative;
+}
+.month-tab:hover { color: var(--text); }
+.month-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
+.month-tab .tab-count {
+  font-size: var(--text-xs); font-family: var(--font-mono);
+  background: var(--surface-3); padding: 0 6px; border-radius: var(--radius-full);
+  margin-left: var(--space-2); color: var(--text-muted);
+}
+.month-tab.active .tab-count { background: var(--accent); color: white; }
+
+/* ===== Event Cards ===== */
+.event-grid { display: flex; flex-direction: column; gap: var(--space-3); }
+.event-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: var(--space-4) var(--space-5);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  display: grid; grid-template-columns: auto 1fr auto; gap: var(--space-4); align-items: start;
+}
+.event-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+.event-card.priority-high { border-left: 3px solid var(--red); }
+.event-card.priority-medium { border-left: 3px solid var(--orange); }
+.event-card.priority-normal { border-left: 3px solid var(--border); }
+
+.event-date {
+  text-align: center; min-width: 64px; padding: var(--space-2);
+  background: var(--surface-2); border-radius: var(--radius-md);
+}
+.event-day { font-size: var(--text-lg); font-weight: 700; font-variant-numeric: tabular-nums; }
+.event-month { font-size: var(--text-xs); color: var(--text-muted); }
+.event-year { font-size: var(--text-xs); color: var(--text-faint); }
+
+.event-body { min-width: 0; }
+.event-title { font-size: var(--text-base); font-weight: 600; margin-bottom: var(--space-1); }
+.event-organizer { font-size: var(--text-xs); color: var(--text-muted); margin-bottom: var(--space-2); }
+.event-tags { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.tag {
+  font-size: var(--text-xs); padding: 2px 8px; border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+.tag-digital { background: var(--accent-glow); color: var(--accent); }
+.tag-compliance { background: var(--red-bg); color: var(--red); }
+.tag-tax { background: var(--orange-bg); color: var(--orange); }
+.tag-supply { background: var(--teal-bg); color: var(--teal); }
+.tag-general { background: var(--purple-bg); color: var(--purple); }
+
+.event-meta { text-align: right; display: flex; flex-direction: column; gap: var(--space-1); align-items: flex-end; min-width: 80px; flex-shrink: 0; }
+.event-type-badge {
+  font-size: var(--text-xs); padding: 2px 8px; border-radius: var(--radius-sm);
+  background: var(--surface-3); color: var(--text-muted);
+}
+.event-status {
+  font-size: var(--text-xs); font-weight: 500; display: inline-flex; align-items: center; gap: 4px;
+  white-space: nowrap;
+}
+.status-confirmed { color: var(--green); }
+.status-upcoming { color: var(--orange); }
+.status-completed { color: var(--text-faint); }
+.event-link { font-size: var(--text-xs); }
+
+/* ===== Source Monitor Table ===== */
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: var(--space-3); margin-top: var(--space-8);
+}
+.section-title { font-size: var(--text-lg); font-weight: 600; }
+.section-desc { font-size: var(--text-xs); color: var(--text-muted); }
+
+.source-table {
+  width: 100%; border-collapse: collapse; font-size: var(--text-sm);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.source-table thead { background: var(--surface-2); }
+.source-table th {
+  text-align: left; padding: var(--space-3) var(--space-4);
+  font-size: var(--text-xs); font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  position: sticky; top: 0; z-index: 1;
+}
+.source-table td {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--border-light);
+  vertical-align: middle;
+}
+.source-table tr:hover td { background: var(--surface-2); }
+
+.status-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: var(--space-2);
+}
+.status-dot.active { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.status-dot.pending { background: var(--orange); }
+
+/* ===== Alert Rules ===== */
+.alert-rules { display: flex; flex-direction: column; gap: var(--space-2); }
+.alert-rule {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4); background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+}
+.alert-icon { width: 20px; height: 20px; flex-shrink: 0; }
+.alert-icon.bell { color: var(--orange); }
+.alert-icon.search { color: var(--accent); }
+.alert-icon.shield { color: var(--green); }
+.alert-text { font-size: var(--text-sm); }
+.alert-text strong { font-weight: 600; }
+.alert-freq {
+  margin-left: auto; font-size: var(--text-xs); font-family: var(--font-mono);
+  color: var(--text-muted); background: var(--surface-2);
+  padding: 2px 8px; border-radius: var(--radius-sm);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .dashboard { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .event-card { grid-template-columns: 1fr; }
+  .event-meta { text-align: left; align-items: flex-start; }
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+</style>
+</head>
+<body>
+<div class="dashboard">
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <rect x="2" y="2" width="28" height="28" rx="6" stroke="var(--accent)" stroke-width="2"/>
+        <path d="M8 20l4-8 4 5 3-3 5 6" stroke="var(--accent)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="24" cy="10" r="2.5" fill="var(--green)"/>
+      </svg>
+      <div>
+        <div class="logo-title">北京企业出海活动监控看板</div>
+        <div class="logo-sub">2026年下半年 · H2 Monitoring Dashboard</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="live-badge"><span class="live-dot"></span>自动监测中</span>
+      <span class="last-updated">数据快照: 2026-07-28</span>
+      <button class="theme-toggle" data-theme-toggle aria-label="切换主题">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="nav-section">
+      <div class="nav-label">视图</div>
+      <button class="nav-item active" data-view="events">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        活动总览
+        <span class="nav-count" id="nav-count-events">22</span>
+      </button>
+      <button class="nav-item" data-view="sources">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        来源监控
+        <span class="nav-count">9</span>
+      </button>
+      <button class="nav-item" data-view="alerts">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        提醒规则
+        <span class="nav-count">5</span>
+      </button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">核心议题</div>
+      <div class="source-list">
+        <span class="source-tag tag tag-digital" data-topic="digital">数字经济</span>
+        <span class="source-tag tag tag-compliance" data-topic="compliance">跨境合规</span>
+        <span class="source-tag tag tag-tax" data-topic="tax">海外税务</span>
+        <span class="source-tag tag tag-supply" data-topic="supply">供应链重塑</span>
+        <span class="source-tag tag tag-general" data-topic="general">综合出海</span>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">监控来源</div>
+      <div class="source-list">
+        <span class="source-tag"><span class="status-dot active"></span>北京市商务局</span>
+        <span class="source-tag"><span class="status-dot active"></span>中关村管委会</span>
+        <span class="source-tag"><span class="status-dot active"></span>北京CBD管委会</span>
+        <span class="source-tag"><span class="status-dot active"></span>北京市经信局</span>
+        <span class="source-tag"><span class="status-dot active"></span>德勤中国</span>
+        <span class="source-tag"><span class="status-dot active"></span>毕马威中国</span>
+        <span class="source-tag"><span class="status-dot active"></span>中欧国际工商学院</span>
+        <span class="source-tag"><span class="status-dot active"></span>全球化智库CCG</span>
+        <span class="source-tag"><span class="status-dot active"></span>服贸会组委会</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main" id="main-content">
+    <!-- KPI Cards -->
+    <div class="kpi-row">
+      <div class="kpi-card blue">
+        <div class="kpi-label">已定档活动</div>
+        <div class="kpi-value" id="kpi-total">22</div>
+        <div class="kpi-meta">2026年7月 - 12月 · 含6月预热活动</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-label">已确认/进行中</div>
+        <div class="kpi-value" id="kpi-confirmed">14</div>
+        <div class="kpi-meta">含已举办活动</div>
+      </div>
+      <div class="kpi-card orange">
+        <div class="kpi-label">即将举办</div>
+        <div class="kpi-value" id="kpi-upcoming">8</div>
+        <div class="kpi-meta">8月及以后</div>
+      </div>
+      <div class="kpi-card purple">
+        <div class="kpi-label">监控来源</div>
+        <div class="kpi-value">9</div>
+        <div class="kpi-meta">全部在线</div>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <div class="filter-group">
+        <span class="filter-label">议题:</span>
+        <button class="chip active" data-filter="topic" data-value="all">全部</button>
+        <button class="chip" data-filter="topic" data-value="digital">数字经济</button>
+        <button class="chip" data-filter="topic" data-value="compliance">跨境合规</button>
+        <button class="chip" data-filter="topic" data-value="tax">海外税务</button>
+        <button class="chip" data-filter="topic" data-value="supply">供应链重塑</button>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">类型:</span>
+        <button class="chip active" data-filter="type" data-value="all">全部</button>
+        <button class="chip" data-filter="type" data-value="forum">论坛</button>
+        <button class="chip" data-filter="type" data-value="lecture">讲座</button>
+        <button class="chip" data-filter="type" data-value="policy">政策解读</button>
+        <button class="chip" data-filter="type" data-value="closed">闭门会</button>
+      </div>
+      <input type="text" class="search-input" id="search-input" placeholder="搜索活动名称、主办单位…">
+    </div>
+
+    <!-- Month Tabs -->
+    <div class="month-tabs" id="month-tabs">
+      <button class="month-tab active" data-month="all">全部<span class="tab-count" id="count-all">22</span></button>
+      <button class="month-tab" data-month="6">6月<span class="tab-count" id="count-6">1</span></button>
+      <button class="month-tab" data-month="7">7月<span class="tab-count" id="count-7">16</span></button>
+      <button class="month-tab" data-month="8">8月<span class="tab-count" id="count-8">2</span></button>
+      <button class="month-tab" data-month="9">9月<span class="tab-count" id="count-9">1</span></button>
+      <button class="month-tab" data-month="10">10月<span class="tab-count" id="count-10">1</span></button>
+      <button class="month-tab" data-month="11">11月<span class="tab-count" id="count-11">1</span></button>
+      <button class="month-tab" data-month="12">12月<span class="tab-count" id="count-12">0</span></button>
+    </div>
+
+    <!-- Event List -->
+    <div class="event-grid" id="event-grid"></div>
+
+    <!-- Source Monitor Table -->
+    <div class="section-header" id="source-section">
+      <div>
+        <div class="section-title">来源监控状态</div>
+        <div class="section-desc">关键信息来源的监测状态与最后检查时间</div>
+      </div>
+    </div>
+    <table class="source-table">
+      <thead>
+        <tr>
+          <th>来源</th>
+          <th>类型</th>
+          <th>监测重点</th>
+          <th>状态</th>
+          <th>最后检查</th>
+          <th>链接</th>
+        </tr>
+      </thead>
+      <tbody id="source-tbody"></tbody>
+    </table>
+
+    <!-- Alert Rules -->
+    <div class="section-header" id="alert-section">
+      <div>
+        <div class="section-title">自动监测与提醒规则</div>
+        <div class="section-desc">系统按以下规则自动扫描来源并推送通知</div>
+      </div>
+    </div>
+    <div class="alert-rules">
+      <div class="alert-rule">
+        <svg class="alert-icon bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="alert-text"><strong>新活动发布提醒</strong> — 当监控来源发布涉及出海主题的论坛、讲座、闭门会等活动公告时立即通知</div>
+        <span class="alert-freq">每日 09:00 SGT</span>
+      </div>
+      <div class="alert-rule">
+        <svg class="alert-icon search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="alert-text"><strong>核心议题关键词扫描</strong> — 数字经济、跨境合规、海外税务、供应链重塑、数据跨境流通等关键词命中时推送</div>
+        <span class="alert-freq">每日 09:00 SGT</span>
+      </div>
+      <div class="alert-rule">
+        <svg class="alert-icon shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="alert-text"><strong>政策发布追踪</strong> — 北京市商务局/经信局发布出海相关新政策、资金扶持措施时即时提醒</div>
+        <span class="alert-freq">每日 09:00 SGT</span>
+      </div>
+      <div class="alert-rule">
+        <svg class="alert-icon bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div class="alert-text"><strong>头部咨询机构活动</strong> — 德勤、毕马威等机构在北京举办出海税务/合规相关研讨会或发布报告时通知</div>
+        <span class="alert-freq">每周一 09:00 SGT</span>
+      </div>
+      <div class="alert-rule">
+        <svg class="alert-icon search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="alert-text"><strong>闭门交流会/精准对接活动</strong> — 发现定向邀请的国别对接、闭门研讨会等高价值活动时优先推送</div>
+        <span class="alert-freq">每日 09:00 SGT</span>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--space-8); padding: var(--space-4); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); font-size: var(--text-xs); color: var(--text-muted);">
+      <strong>说明：</strong>本看板展示 2026 年 7 月 28 日的数据快照，涵盖已公开的定档活动信息。自动监测任务每日 09:00 (新加坡时间) 执行扫描，发现新活动时将通过应用内通知推送。看板数据将在每次发现新活动后更新。如需将活动同步至日历或设置单场活动提醒，请告知。
+    </div>
+  </main>
+</div>
+
+<script>
+// ===== Event Data =====
+const events = [
+  {
+    id: 1, month: 7, day: 2, year: 2026,
+    title: "2026全球数字经济大会",
+    organizer: "全球数字经济大会组委会 / 北京市经信局",
+    type: "forum", typeLabel: "论坛",
+    topics: ["digital", "compliance"],
+    status: "completed", statusLabel: "已举办",
+    priority: "high",
+    desc: "7月2-5日，50余场专题论坛，涵盖AI、数字治理、数据要素等",
+    url: "http://www.bjchy.gov.cn/dynamic/news/4028805a9f0458c9019f10fb171100b2.html"
+  },
+  {
+    id: 2, month: 7, day: 3, year: 2026,
+    title: "全球数字经济大会出海国际合作论坛",
+    organizer: "全球数字经济大会组委会 / 市经信局 / 大兴区政府",
+    type: "forum", typeLabel: "论坛",
+    topics: ["digital", "compliance"],
+    status: "completed", statusLabel: "已举办",
+    priority: "high",
+    desc: "首发《2026重点国别数字经济合作需求清单》，14个全球服务站授牌，出海十条政策发布",
+    url: "https://wb.beijing.gov.cn/home/dwhz/dbjw/202607/t20260721_4774433.html"
+  },
+  {
+    id: 3, month: 7, day: 3, year: 2026,
+    title: "全球订单发布大会（启航专场）— 科创出海会客厅",
+    organizer: "中关村科学城管委会 / 北京市发改委",
+    type: "forum", typeLabel: "论坛",
+    topics: ["supply", "digital"],
+    status: "completed", statusLabel: "已举办",
+    priority: "high",
+    desc: "国际公共采购商机发布，联合国采购投标实务操作，中关村综保区科创出海会客厅",
+    url: "https://zyk.bjhd.gov.cn/jbdt/auto4510_51816/auto4510_54705/auto4510/auto4510/202607/t20260706_4820911.shtml"
+  },
+  {
+    id: 4, month: 7, day: 3, year: 2026,
+    title: "中国—东盟数字经济合作闭门对接活动",
+    organizer: "北京出海基地",
+    type: "closed", typeLabel: "闭门会",
+    topics: ["digital", "compliance"],
+    status: "completed", statusLabel: "已举办",
+    priority: "high",
+    desc: "出海国际合作论坛配套闭门活动，推动国际合作意向精准转化为实体产业项目",
+    url: "https://chanye.bjdx.gov.cn/chanye/qyfw8/cydt/2418170/index.html"
+  },
+  {
+    id: 5, month: 7, day: 9, year: 2026,
+    title: "第六届「智荟中欧·北京论坛」",
+    organizer: "中欧国际工商学院 / 北京市投促中心",
+    type: "forum", typeLabel: "论坛",
+    topics: ["general", "compliance"],
+    status: "completed", statusLabel: "已举办",
+    priority: "medium",
+    desc: "主题：全球秩序重构与企业的全球化选择，11位政商学界专家深度分享",
+    url: "https://finance.sina.com.cn/hy/hyjz/2026-07-13/doc-inihrnpk9023789.shtml"
+  },
+  {
+    id: 6, month: 7, day: 10, year: 2026,
+    title: "2026王府井论坛",
+    organizer: "东城区政府 / 北京市商务局 / 北京市文旅局",
+    type: "forum", typeLabel: "论坛",
+    topics: ["general"],
+    status: "completed", statusLabel: "已举办",
+    priority: "normal",
+    desc: "1场主论坛+3场分论坛+N场配套活动，含科技引领消费分论坛",
+    url: "https://www.bjdch.gov.cn/ywdt/dcyw/202607/t20260713_4759101.html"
+  },
+  {
+    id: 7, month: 7, day: 13, year: 2026,
+    title: "2026新京报贝壳财经年会「出海专场」（香港）",
+    organizer: "新京报贝壳财经 / 香港投资推广署",
+    type: "forum", typeLabel: "论坛",
+    topics: ["tax", "compliance"],
+    status: "completed", statusLabel: "已举办",
+    priority: "medium",
+    desc: "京港联动，香港出海专班服务解读，跨境融资与数字经济协同出海",
+    url: "https://news.qq.com/rain/a/20260714A03YOI00"
+  },
+  {
+    id: 8, month: 7, day: 16, year: 2026,
+    title: "「在变局中远航」全球税改下企业出海讲座",
+    organizer: "港丰集团 / 北京市商业联合会",
+    type: "lecture", typeLabel: "讲座",
+    topics: ["tax", "compliance"],
+    status: "completed", statusLabel: "已举办",
+    priority: "high",
+    desc: "300+企业高管参会，CRS2.0合规、香港账户监管、资金合规进出通路深度解析",
+    url: "https://www.bjnews.com.cn/detail/1784181315129424.html"
+  },
+  {
+    id: 9, month: 7, day: 16, year: 2026,
+    title: "2026中关村企业家创新发展大会",
+    organizer: "中关村科技企业家协会",
+    type: "forum", typeLabel: "论坛",
+    topics: ["digital", "supply"],
+    status: "completed", statusLabel: "已举办",
+    priority: "medium",
+    desc: "主题：引领全球科技合作，赋能实体产业创新，400位政企学代表参会",
+    url: "https://www.news.cn/sci-tech/20260720/d3fdc8d07b554e328e1f82e4f184c58c/c.html"
+  },
+  {
+    id: 10, month: 7, day: 17, year: 2026,
+    title: "毕马威税务培训：出海企业的税务考量及案例分享",
+    organizer: "毕马威中国",
+    type: "lecture", typeLabel: "讲座",
+    topics: ["tax"],
+    status: "confirmed", statusLabel: "报名中",
+    priority: "high",
+    desc: "控股架构设计、转让定价、常设机构风险识别、供应链涉税管理，毕马威税务高级经理黄丹主讲",
+    url: "https://finance.sina.com.cn/wm/2026-07-17/doc-iniiccva1477497.shtml"
+  },
+  {
+    id: 11, month: 7, day: 20, year: 2026,
+    title: "「先丰企航」发展中国家专场产业对接交流会",
+    organizer: "中关村丰台园 / 商务部国际商务官员研修学院",
+    type: "closed", typeLabel: "闭门会",
+    topics: ["general", "supply"],
+    status: "completed", statusLabel: "已举办",
+    priority: "medium",
+    desc: "柬埔寨、尼日利亚、南非等国研修代表与园区企业对接，助力抢抓一带一路出海机遇",
+    url: "https://kw.beijing.gov.cn/xwdt/kcyx/xwdtyqqy/202607/t20260723_4780593.html"
+  },
+  {
+    id: 12, month: 7, day: 21, year: 2026,
+    title: "北京「出海十条」政策发布会",
+    organizer: "北京市经济和信息化局",
+    type: "policy", typeLabel: "政策解读",
+    topics: ["digital", "compliance", "tax"],
+    status: "completed", statusLabel: "已举办",
+    priority: "high",
+    desc: "《北京市关于加快促进数字经济企业出海的若干措施》，拓渠道、强服务、建生态三大维度10条举措",
+    url: "https://jxj.beijing.gov.cn/jxdt/gzdt/202607/t20260722_4778089.html"
+  },
+  {
+    id: 13, month: 7, day: 22, year: 2026,
+    title: "北京市「走出去」系列活动 — 中国—白俄罗斯经贸合作精准对接",
+    organizer: "北京市商务局 / 白俄罗斯驻华大使馆",
+    type: "closed", typeLabel: "闭门会",
+    topics: ["supply", "compliance"],
+    status: "completed", statusLabel: "已举办",
+    priority: "high",
+    desc: "聚焦白俄罗斯投资政策与产业机遇，白俄罗斯服务站挂牌，机器人/信息软件重点赛道对接",
+    url: "https://chanye.bjdx.gov.cn/chanye/qyfw8/cydt/2418331/index.html"
+  },
+  {
+    id: 14, month: 7, day: 23, year: 2026,
+    title: "「智聚中关村·人才政策园区行」系列宣讲 — 走进海淀园",
+    organizer: "北京市科委 / 中关村管委会",
+    type: "policy", typeLabel: "政策解读",
+    topics: ["general"],
+    status: "completed", statusLabel: "已举办",
+    priority: "normal",
+    desc: "高创计划、科技新星计划、国际青年人才来华交流项目等外籍人才政策宣讲",
+    url: "https://www.ncsti.gov.cn/kjdt/xwjj/202607/t20260721_251639.html"
+  },
+  {
+    id: 15, month: 7, day: 26, year: 2026,
+    title: "跨境税务合规与高净值人群财务税务研修班（上海）",
+    organizer: "中税协 / 毕马威税务合伙人讲授",
+    type: "lecture", typeLabel: "讲座",
+    topics: ["tax", "compliance"],
+    status: "confirmed", statusLabel: "报名中",
+    priority: "medium",
+    desc: "7月26日-8月1日，上海财经大学，BEPS2.0落地实操、跨境投资架构设计、AI/RPA税务工具应用",
+    url: "https://www.cctaa.cn/zxtz/202607/t20260708_1158847.html"
+  },
+  {
+    id: 16, month: 7, day: 18, year: 2026,
+    title: "毕马威AI商业化突围与资本进阶论坛（WAIC 2026）",
+    organizer: "毕马威中国 / 2026世界人工智能大会",
+    type: "forum", typeLabel: "论坛",
+    topics: ["digital"],
+    status: "completed", statusLabel: "已举办",
+    priority: "medium",
+    desc: "上海WAIC期间，发布《跨越奇点：世界模型如何重塑具身智能产业与商业新范式》报告",
+    url: "https://kpmg.com/cn/zh/media/press-releases/2026/07/kpmg-will-host-an-ai-commercialization-forum-at-the-2026-waic.html"
+  },
+  // August
+  {
+    id: 17, month: 8, day: 5, year: 2026,
+    title: "第六届数智化转型升级发展论坛 — AI出海趋势论坛",
+    organizer: "数智猿×数据猿 / 中关村科学城公司",
+    type: "forum", typeLabel: "论坛",
+    topics: ["digital"],
+    status: "upcoming", statusLabel: "即将举办",
+    priority: "high",
+    desc: "中关村展示中心，主题「深潜·远航」，AI Agent与出海趋势，含出海新势力企业颁奖典礼",
+    url: "https://finance.sina.com.cn/wm/2026-07-03/doc-inifntfe2418529.shtml"
+  },
+  {
+    id: 18, month: 8, day: 12, year: 2026,
+    title: "2026首都侨智发展大会",
+    organizer: "北京市侨联 / 北京海外联谊会 / 北京经开区管委会",
+    type: "forum", typeLabel: "论坛",
+    topics: ["general", "supply"],
+    status: "upcoming", statusLabel: "即将举办",
+    priority: "high",
+    desc: "8月12-14日，北京经开区，「1+6+N」架构含「助企出海」专场，海外侨胞与科创人才精准对接",
+    url: "https://kfqgw.beijing.gov.cn/ywdt/tt/cxfw/202607/t20260724_4783599.html"
+  },
+  // September
+  {
+    id: 19, month: 9, day: 9, year: 2026,
+    title: "2026年中国国际服务贸易交易会（服贸会）",
+    organizer: "服贸会组委会 / 北京市政府",
+    type: "forum", typeLabel: "论坛",
+    topics: ["digital", "compliance", "supply", "general"],
+    status: "upcoming", statusLabel: "即将举办",
+    priority: "high",
+    desc: "9月9-13日，首钢园，41场论坛会议+33场洽谈推介+23项配套活动，含服务出海专题",
+    url: "https://xinwen.bjd.com.cn/content/s6a51a2a6e4b03fa51a8143c8.html"
+  },
+  // October
+  {
+    id: 20, month: 10, day: 17, year: 2026,
+    title: "2026中国企业出海交流大会",
+    organizer: "全球化智库(CCG)",
+    type: "forum", typeLabel: "论坛",
+    topics: ["digital", "compliance", "tax", "supply"],
+    status: "upcoming", statusLabel: "即将举办",
+    priority: "high",
+    desc: "10月17-18日，6大专题论坛：AI数字经济出海合规、新能源全球化、全球合规风控、跨境财税与资金管理、出海服务生态、医药健康出海，含60+驻华大使晚宴闭门对接",
+    url: "https://www.163.com/dy/article/L232K94F0519PJJ6.html"
+  },
+  // November
+  {
+    id: 21, month: 11, day: 2, year: 2026,
+    title: "2026香港金融科技周 — 中关村展团出海参展",
+    organizer: "中关村金融科技产业发展联盟 / 香港投资推广署",
+    type: "forum", typeLabel: "论坛",
+    topics: ["digital", "tax"],
+    status: "upcoming", statusLabel: "即将举办",
+    priority: "medium",
+    desc: "11月2-6日，香港会议展览中心，45000人/1000+演讲嘉宾/800+参展企业，中关村金融科技展区集中出海",
+    url: "https://news.qq.com/rain/a/20260723A0A6T600"
+  },
+  // June (already held, part of H2 ecosystem reference)
+  {
+    id: 22, month: 6, day: 17, year: 2026,
+    title: "2026北京CBD跨境投资论坛 — 京港聚力·连接全球",
+    organizer: "香港驻京办 / 北京CBD管委会 / 北京市发改委",
+    type: "forum", typeLabel: "论坛",
+    topics: ["compliance", "tax"],
+    status: "completed", statusLabel: "已举办",
+    priority: "medium",
+    desc: "300+嘉宾，发布「护航企业出海京港专业服务图谱」，香港出海专班全方位支持服务解读",
+    url: "https://bau.com.hk/web/article/1521111635549548544/web/content_1521111635549548544.html"
+  }
+];
+
+// ===== Source Data =====
+const sources = [
+  { name: "北京市商务局", type: "政府机关", focus: "走出去系列活动、经贸对接、对外投资政策", status: "active", lastCheck: "2026-07-28 09:00", url: "https://sw.beijing.gov.cn" },
+  { name: "中关村管委会（市科委）", type: "政府机关", focus: "科创出海会客厅、中关村论坛系列、人才政策", status: "active", lastCheck: "2026-07-28 09:00", url: "https://kw.beijing.gov.cn" },
+  { name: "北京CBD管委会", type: "政府机关", focus: "CBD论坛年会、跨境投资论坛、法商融合示范区", status: "active", lastCheck: "2026-07-28 09:00", url: "https://www.bjchy.gov.cn" },
+  { name: "北京市经信局", type: "政府机关", focus: "数字经济出海政策、出海十条、出海基地", status: "active", lastCheck: "2026-07-28 09:00", url: "https://jxj.beijing.gov.cn" },
+  { name: "德勤中国 (Deloitte)", type: "咨询机构", focus: "IPO市场报告、出海税务研讨、科技企业评选", status: "active", lastCheck: "2026-07-28 09:00", url: "https://www2.deloitte.com/cn" },
+  { name: "毕马威中国 (KPMG)", type: "咨询机构", focus: "出海税务培训、AI商业化、跨境合规方案", status: "active", lastCheck: "2026-07-28 09:00", url: "https://kpmg.com/cn" },
+  { name: "中欧国际工商学院", type: "智库/教育", focus: "智荟中欧论坛、企业全球化选择、跨境布局", status: "active", lastCheck: "2026-07-28 09:00", url: "https://www.ceibs.edu" },
+  { name: "全球化智库 (CCG)", type: "智库", focus: "中国企业出海交流大会、政策研究、资源对接", status: "active", lastCheck: "2026-07-28 09:00", url: "https://www.ccg.org.cn" },
+  { name: "服贸会组委会", type: "展会平台", focus: "服务贸易、数字贸易、服务出海专题论坛", status: "active", lastCheck: "2026-07-28 09:00", url: "https://www.ciftis.org" }
+];
+
+// ===== Topic Labels =====
+const topicLabels = {
+  digital: "数字经济",
+  compliance: "跨境合规",
+  tax: "海外税务",
+  supply: "供应链重塑",
+  general: "综合出海"
+};
+
+// ===== State =====
+let currentMonth = 'all';
+let currentTopic = 'all';
+let currentType = 'all';
+let searchTerm = '';
+
+// ===== Render Events =====
+function renderEvents() {
+  const grid = document.getElementById('event-grid');
+  let filtered = events.filter(e => {
+    if (currentMonth !== 'all' && e.month !== parseInt(currentMonth)) return false;
+    if (currentTopic !== 'all' && !e.topics.includes(currentTopic)) return false;
+    if (currentType !== 'all' && e.type !== currentType) return false;
+    if (searchTerm) {
+      const s = searchTerm.toLowerCase();
+      if (!e.title.toLowerCase().includes(s) && !e.organizer.toLowerCase().includes(s) && !e.desc.toLowerCase().includes(s)) return false;
+    }
+    return true;
+  });
+
+  // Sort: upcoming first by date, then completed by date desc
+  filtered.sort((a, b) => {
+    if (a.month !== b.month) return a.month - b.month;
+    return a.day - b.day;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div style="text-align: center; padding: var(--space-12); color: var(--text-muted);">未找到匹配的活动</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(e => `
+    <div class="event-card priority-${e.priority}">
+      <div class="event-date">
+        <div class="event-day">${e.day}</div>
+        <div class="event-month">${e.month}月</div>
+        <div class="event-year">${e.year}</div>
+      </div>
+      <div class="event-body">
+        <div class="event-title">${e.title}</div>
+        <div class="event-organizer">${e.organizer}</div>
+        <div style="font-size: var(--text-xs); color: var(--text-muted); margin-bottom: var(--space-2);">${e.desc}</div>
+        <div class="event-tags">
+          ${e.topics.map(t => `<span class="tag tag-${t}">${topicLabels[t]}</span>`).join('')}
+        </div>
+      </div>
+      <div class="event-meta">
+        <span class="event-type-badge">${e.typeLabel}</span>
+        <span class="event-status status-${e.status}">● ${e.statusLabel}</span>
+        <a href="${e.url}" target="_blank" rel="noopener" class="event-link">查看详情 →</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== Render Source Table =====
+function renderSources() {
+  const tbody = document.getElementById('source-tbody');
+  tbody.innerHTML = sources.map(s => `
+    <tr>
+      <td style="font-weight: 500;">${s.name}</td>
+      <td><span style="font-size: var(--text-xs); color: var(--text-muted);">${s.type}</span></td>
+      <td style="font-size: var(--text-xs); color: var(--text-muted);">${s.focus}</td>
+      <td><span class="status-dot ${s.status === 'active' ? 'active' : 'pending'}"></span>${s.status === 'active' ? '在线监测' : '待连接'}</td>
+      <td style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted);">${s.lastCheck}</td>
+      <td><a href="${s.url}" target="_blank" rel="noopener" style="font-size: var(--text-xs);">访问 →</a></td>
+    </tr>
+  `).join('');
+}
+
+// ===== Update Counts =====
+function updateCounts() {
+  const monthCounts = { 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0 };
+  events.forEach(e => { if (monthCounts[e.month] !== undefined) monthCounts[e.month]++; });
+  
+  document.getElementById('count-all').textContent = events.length;
+  for (const m in monthCounts) {
+    const el = document.getElementById('count-' + m);
+    if (el) el.textContent = monthCounts[m];
+  }
+
+  // KPI
+  const confirmed = events.filter(e => e.status === 'completed' || e.status === 'confirmed').length;
+  const upcoming = events.filter(e => e.status === 'upcoming').length;
+  document.getElementById('kpi-total').textContent = events.length;
+  document.getElementById('kpi-confirmed').textContent = confirmed;
+  document.getElementById('kpi-upcoming').textContent = upcoming;
+  document.getElementById('nav-count-events').textContent = events.length;
+}
+
+// ===== Event Listeners =====
+document.querySelectorAll('.month-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.month-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentMonth = tab.dataset.month;
+    renderEvents();
+  });
+});
+
+document.querySelectorAll('[data-filter="topic"]').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter="topic"]').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    currentTopic = chip.dataset.value;
+    renderEvents();
+  });
+});
+
+document.querySelectorAll('[data-filter="type"]').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter="type"]').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    currentType = chip.dataset.value;
+    renderEvents();
+  });
+});
+
+document.querySelectorAll('.source-tag[data-topic]').forEach(tag => {
+  tag.addEventListener('click', () => {
+    const topic = tag.dataset.topic;
+    document.querySelectorAll('[data-filter="topic"]').forEach(c => {
+      c.classList.toggle('active', c.dataset.value === topic);
+    });
+    currentTopic = topic;
+    renderEvents();
+    document.getElementById('event-grid').scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+document.getElementById('search-input').addEventListener('input', (e) => {
+  searchTerm = e.target.value.trim();
+  renderEvents();
+});
+
+// Sidebar navigation
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    const view = item.dataset.view;
+    if (view === 'sources') {
+      document.getElementById('source-section').scrollIntoView({ behavior: 'smooth' });
+    } else if (view === 'alerts') {
+      document.getElementById('alert-section').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      document.getElementById('event-grid').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// Theme toggle
+(function() {
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = 'dark';
+  t.addEventListener('click', () => {
+    d = d === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', d);
+    t.innerHTML = d === 'dark'
+      ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+      : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  });
+})();
+
+// ===== Init =====
+renderEvents();
+renderSources();
+updateCounts();
+</script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>

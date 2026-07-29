@@ -1,0 +1,452 @@
+[
+  {
+    "id": 1,
+    "month": 7,
+    "day": 2,
+    "year": 2026,
+    "title": "2026全球数字经济大会",
+    "organizer": "全球数字经济大会组委会 / 北京市经信局",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital",
+      "compliance"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "high",
+    "desc": "7月2-5日，50余场专题论坛，涵盖AI、数字治理、数据要素等",
+    "url": "http://www.bjchy.gov.cn/dynamic/news/4028805a9f0458c9019f10fb171100b2.html",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 2,
+    "month": 7,
+    "day": 3,
+    "year": 2026,
+    "title": "全球数字经济大会出海国际合作论坛",
+    "organizer": "全球数字经济大会组委会 / 市经信局 / 大兴区政府",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital",
+      "compliance"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "high",
+    "desc": "首发《2026重点国别数字经济合作需求清单》，14个全球服务站授牌，出海十条政策发布",
+    "url": "https://wb.beijing.gov.cn/home/dwhz/dbjw/202607/t20260721_4774433.html",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 3,
+    "month": 7,
+    "day": 3,
+    "year": 2026,
+    "title": "全球订单发布大会（启航专场）— 科创出海会客厅",
+    "organizer": "中关村科学城管委会 / 北京市发改委",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "supply",
+      "digital"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "high",
+    "desc": "国际公共采购商机发布，联合国采购投标实务操作，中关村综保区科创出海会客厅",
+    "url": "https://zyk.bjhd.gov.cn/jbdt/auto4510_51816/auto4510_54705/auto4510/auto4510/202607/t20260706_4820911.shtml",
+    "venue": "中关村综保区科创出海会客厅",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 4,
+    "month": 7,
+    "day": 3,
+    "year": 2026,
+    "title": "中国—东盟数字经济合作闭门对接活动",
+    "organizer": "北京出海基地",
+    "type": "closed",
+    "typeLabel": "闭门会",
+    "topics": [
+      "digital",
+      "compliance"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "high",
+    "desc": "出海国际合作论坛配套闭门活动，推动国际合作意向精准转化为实体产业项目",
+    "url": "https://chanye.bjdx.gov.cn/chanye/qyfw8/cydt/2418170/index.html",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 5,
+    "month": 7,
+    "day": 9,
+    "year": 2026,
+    "title": "第六届「智荟中欧·北京论坛」",
+    "organizer": "中欧国际工商学院 / 北京市投促中心",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "general",
+      "compliance"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "主题：全球秩序重构与企业的全球化选择，11位政商学界专家深度分享",
+    "url": "https://finance.sina.com.cn/hy/hyjz/2026-07-13/doc-inihrnpk9023789.shtml",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 6,
+    "month": 7,
+    "day": 10,
+    "year": 2026,
+    "title": "2026王府井论坛",
+    "organizer": "东城区政府 / 北京市商务局 / 北京市文旅局",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "general"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "normal",
+    "desc": "1场主论坛+3场分论坛+N场配套活动，含科技引领消费分论坛",
+    "url": "https://www.bjdch.gov.cn/ywdt/dcyw/202607/t20260713_4759101.html",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 7,
+    "month": 7,
+    "day": 13,
+    "year": 2026,
+    "title": "2026新京报贝壳财经年会「出海专场」（香港）",
+    "organizer": "新京报贝壳财经 / 香港投资推广署",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "tax",
+      "compliance"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "京港联动，香港出海专班服务解读，跨境融资与数字经济协同出海",
+    "url": "https://news.qq.com/rain/a/20260714A03YOI00",
+    "venue": "香港",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 8,
+    "month": 7,
+    "day": 16,
+    "year": 2026,
+    "title": "「在变局中远航」全球税改下企业出海讲座",
+    "organizer": "港丰集团 / 北京市商业联合会",
+    "type": "lecture",
+    "typeLabel": "讲座",
+    "topics": [
+      "tax",
+      "compliance"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "high",
+    "desc": "300+企业高管参会，CRS2.0合规、香港账户监管、资金合规进出通路深度解析",
+    "url": "https://www.bjnews.com.cn/detail/1784181315129424.html",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 9,
+    "month": 7,
+    "day": 16,
+    "year": 2026,
+    "title": "2026中关村企业家创新发展大会",
+    "organizer": "中关村科技企业家协会",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital",
+      "supply"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "主题：引领全球科技合作，赋能实体产业创新，400位政企学代表参会",
+    "url": "https://www.news.cn/sci-tech/20260720/d3fdc8d07b554e328e1f82e4f184c58c/c.html",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 10,
+    "month": 7,
+    "day": 17,
+    "year": 2026,
+    "title": "毕马威税务培训：出海企业的税务考量及案例分享",
+    "organizer": "毕马威中国",
+    "type": "lecture",
+    "typeLabel": "讲座",
+    "topics": [
+      "tax"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "high",
+    "desc": "控股架构设计、转让定价、常设机构风险识别、供应链涉税管理，毕马威税务高级经理黄丹主讲",
+    "url": "https://finance.sina.com.cn/wm/2026-07-17/doc-iniiccva1477497.shtml",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 11,
+    "month": 7,
+    "day": 20,
+    "year": 2026,
+    "title": "「先丰企航」发展中国家专场产业对接交流会",
+    "organizer": "中关村丰台园 / 商务部国际商务官员研修学院",
+    "type": "closed",
+    "typeLabel": "闭门会",
+    "topics": [
+      "general",
+      "supply"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "柬埔寨、尼日利亚、南非等国研修代表与园区企业对接，助力抢抓一带一路出海机遇",
+    "url": "https://kw.beijing.gov.cn/xwdt/kcyx/xwdtyqqy/202607/t20260723_4780593.html",
+    "venue": "中关村丰台园",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 12,
+    "month": 7,
+    "day": 21,
+    "year": 2026,
+    "title": "北京「出海十条」政策发布会",
+    "organizer": "北京市经济和信息化局",
+    "type": "policy",
+    "typeLabel": "政策解读",
+    "topics": [
+      "digital",
+      "compliance",
+      "tax"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "high",
+    "desc": "《北京市关于加快促进数字经济企业出海的若干措施》，拓渠道、强服务、建生态三大维度10条举措",
+    "url": "https://jxj.beijing.gov.cn/jxdt/gzdt/202607/t20260722_4778089.html",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 13,
+    "month": 7,
+    "day": 22,
+    "year": 2026,
+    "title": "北京市「走出去」系列活动 — 中国—白俄罗斯经贸合作精准对接",
+    "organizer": "北京市商务局 / 白俄罗斯驻华大使馆",
+    "type": "closed",
+    "typeLabel": "闭门会",
+    "topics": [
+      "supply",
+      "compliance"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "high",
+    "desc": "聚焦白俄罗斯投资政策与产业机遇，白俄罗斯服务站挂牌，机器人/信息软件重点赛道对接",
+    "url": "https://chanye.bjdx.gov.cn/chanye/qyfw8/cydt/2418331/index.html",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 14,
+    "month": 7,
+    "day": 23,
+    "year": 2026,
+    "title": "「智聚中关村·人才政策园区行」系列宣讲 — 走进海淀园",
+    "organizer": "北京市科委 / 中关村管委会",
+    "type": "policy",
+    "typeLabel": "政策解读",
+    "topics": [
+      "general"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "normal",
+    "desc": "高创计划、科技新星计划、国际青年人才来华交流项目等外籍人才政策宣讲",
+    "url": "https://www.ncsti.gov.cn/kjdt/xwjj/202607/t20260721_251639.html",
+    "venue": "海淀园",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 15,
+    "month": 7,
+    "day": 26,
+    "year": 2026,
+    "title": "跨境税务合规与高净值人群财务税务研修班（上海）",
+    "organizer": "中税协 / 毕马威税务合伙人讲授",
+    "type": "lecture",
+    "typeLabel": "讲座",
+    "topics": [
+      "tax",
+      "compliance"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "7月26日-8月1日，上海财经大学，BEPS2.0落地实操、跨境投资架构设计、AI/RPA税务工具应用",
+    "url": "https://www.cctaa.cn/zxtz/202607/t20260708_1158847.html",
+    "venue": "上海财经大学",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 16,
+    "month": 7,
+    "day": 18,
+    "year": 2026,
+    "title": "毕马威AI商业化突围与资本进阶论坛（WAIC 2026）",
+    "organizer": "毕马威中国 / 2026世界人工智能大会",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "上海WAIC期间，发布《跨越奇点：世界模型如何重塑具身智能产业与商业新范式》报告",
+    "url": "https://kpmg.com/cn/zh/media/press-releases/2026/07/kpmg-will-host-an-ai-commercialization-forum-at-the-2026-waic.html",
+    "venue": "上海（世界人工智能大会）",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 17,
+    "month": 8,
+    "day": 5,
+    "year": 2026,
+    "title": "第六届数智化转型升级发展论坛 — AI出海趋势论坛",
+    "organizer": "数智猿×数据猿 / 中关村科学城公司",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital"
+    ],
+    "status": "upcoming",
+    "statusLabel": "即将举办",
+    "priority": "high",
+    "desc": "中关村展示中心，主题「深潜·远航」，AI Agent与出海趋势，含出海新势力企业颁奖典礼",
+    "url": "https://finance.sina.com.cn/wm/2026-07-03/doc-inifntfe2418529.shtml",
+    "venue": "中关村展示中心",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 18,
+    "month": 8,
+    "day": 12,
+    "year": 2026,
+    "title": "2026首都侨智发展大会",
+    "organizer": "北京市侨联 / 北京海外联谊会 / 北京经开区管委会",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "general",
+      "supply"
+    ],
+    "status": "upcoming",
+    "statusLabel": "即将举办",
+    "priority": "high",
+    "desc": "8月12-14日，北京经开区，「1+6+N」架构含「助企出海」专场，海外侨胞与科创人才精准对接",
+    "url": "https://kfqgw.beijing.gov.cn/ywdt/tt/cxfw/202607/t20260724_4783599.html",
+    "venue": "北京经开区",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 19,
+    "month": 9,
+    "day": 9,
+    "year": 2026,
+    "title": "2026年中国国际服务贸易交易会（服贸会）",
+    "organizer": "服贸会组委会 / 北京市政府",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital",
+      "compliance",
+      "supply",
+      "general"
+    ],
+    "status": "upcoming",
+    "statusLabel": "即将举办",
+    "priority": "high",
+    "desc": "9月9-13日，首钢园，41场论坛会议+33场洽谈推介+23项配套活动，含服务出海专题",
+    "url": "https://xinwen.bjd.com.cn/content/s6a51a2a6e4b03fa51a8143c8.html",
+    "venue": "首钢园",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 20,
+    "month": 10,
+    "day": 17,
+    "year": 2026,
+    "title": "2026中国企业出海交流大会",
+    "organizer": "全球化智库(CCG)",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital",
+      "compliance",
+      "tax",
+      "supply"
+    ],
+    "status": "upcoming",
+    "statusLabel": "即将举办",
+    "priority": "high",
+    "desc": "10月17-18日，6大专题论坛：AI数字经济出海合规、新能源全球化、全球合规风控、跨境财税与资金管理、出海服务生态、医药健康出海，含60+驻华大使晚宴闭门对接",
+    "url": "https://www.163.com/dy/article/L232K94F0519PJJ6.html",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 21,
+    "month": 11,
+    "day": 2,
+    "year": 2026,
+    "title": "2026香港金融科技周 — 中关村展团出海参展",
+    "organizer": "中关村金融科技产业发展联盟 / 香港投资推广署",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital",
+      "tax"
+    ],
+    "status": "upcoming",
+    "statusLabel": "即将举办",
+    "priority": "medium",
+    "desc": "11月2-6日，香港会议展览中心，45000人/1000+演讲嘉宾/800+参展企业，中关村金融科技展区集中出海",
+    "url": "https://news.qq.com/rain/a/20260723A0A6T600",
+    "venue": "香港会议展览中心",
+    "registration": "详见活动链接"
+  },
+  {
+    "id": 22,
+    "month": 6,
+    "day": 17,
+    "year": 2026,
+    "title": "2026北京CBD跨境投资论坛 — 京港聚力·连接全球",
+    "organizer": "香港驻京办 / 北京CBD管委会 / 北京市发改委",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "compliance",
+      "tax"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "300+嘉宾，发布「护航企业出海京港专业服务图谱」，香港出海专班全方位支持服务解读",
+    "url": "https://bau.com.hk/web/article/1521111635549548544/web/content_1521111635549548544.html",
+    "registration": "详见活动链接"
+  }
+]
