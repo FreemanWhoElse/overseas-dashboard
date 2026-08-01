@@ -6,6 +6,7 @@ import re
 import time
 import urllib.request
 import urllib.parse
+import ssl
 import logging
 from datetime import datetime
 from lxml import html as lxml_html
@@ -14,12 +15,32 @@ from config import KEYWORDS, SOURCES, HEADERS, REQUEST_TIMEOUT, REQUEST_DELAY
 
 logger = logging.getLogger(__name__)
 
+# 创建 SSL 上下文: 优先用系统证书，没有则跳过验证
+_ssl_ctx = None
+for _cert_path in [
+    "/etc/ssl/cert.pem",
+    "/Library/Frameworks/Python.framework/Versions/3.14/etc/openssl/cert.pem",
+]:
+    try:
+        import os as _os
+        if _os.path.exists(_cert_path):
+            _ssl_ctx = ssl.create_default_context(cafile=_cert_path)
+            logger.debug("SSL 证书: %s", _cert_path)
+            break
+    except Exception:
+        continue
+if _ssl_ctx is None:
+    _ssl_ctx = ssl.create_default_context()
+    _ssl_ctx.check_hostname = False
+    _ssl_ctx.verify_mode = ssl.CERT_NONE
+    logger.debug("SSL 证书: 跳过验证 (无可用证书)")
+
 
 def fetch_url(url, timeout=REQUEST_TIMEOUT):
     """抓取 URL，返回解码后的 HTML 文本。失败返回 None。"""
     try:
         req = urllib.request.Request(url, headers=HEADERS)
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
+        with urllib.request.urlopen(req, timeout=timeout, context=_ssl_ctx) as resp:
             raw = resp.read()
             # 尝试从响应头获取编码，否则尝试自动检测
             charset = resp.headers.get_content_charset()

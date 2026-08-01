@@ -7,12 +7,14 @@
 
     <key>ProgramArguments</key>
     <array>
-        <string>/usr/bin/python3</string>
+        <string>/usr/bin/caffeinate</string>
+        <string>-i</string>
+        <string>/Library/Frameworks/Python.framework/Versions/3.14/bin/python3</string>
         <string>__PROJECT_DIR__/monitor/main.py</string>
     </array>
 
     <key>WorkingDirectory</key>
-    <string>__PROJECT_DIR__/monitor</string>
+    <string>/tmp</string>
 
     <!-- 每周一、三、六 09:00 执行 (launchd: 0=周日 1=周一 ... 6=周六) -->
     <key>StartCalendarInterval</key>
@@ -55,10 +57,12 @@
 
     <key>EnvironmentVariables</key>
     <dict>
-        <key>PATH</key>
-        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
-        <key>PYTHONPATH</key>
-        <string>__PROJECT_DIR__/monitor</string>
+      <key>PATH</key>
+      <string>/Library/Frameworks/Python.framework/Versions/3.14/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+      <key>PYTHONPATH</key>
+      <string>__PROJECT_DIR__/monitor</string>
+      <key>HOME</key>
+      <string>__HOME_DIR__</string>
     </dict>
 </dict>
 </plist>
