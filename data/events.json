@@ -715,5 +715,25 @@
     "month": 7,
     "day": 27,
     "id": 39
+  },
+  {
+    "title": "“扬帆出海 中银相伴”出海金融专\n\t\t\t\t\t\t\t\t\t\t…",
+    "organizer": "京企走出去服务平台",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "general"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "",
+    "url": "https://beijing.investgo.cn/article/touchd/hdbd/202607/853732.html?channelId=145@cuId=53d8a7e49f47dbf8019f4be44bdd0317",
+    "venue": "",
+    "registration": "详见活动链接",
+    "year": 2026,
+    "month": 7,
+    "day": 1,
+    "id": 40
   }
 ]
