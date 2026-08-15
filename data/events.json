@@ -355,8 +355,8 @@
       "general",
       "supply"
     ],
-    "status": "upcoming",
-    "statusLabel": "即将举办",
+    "status": "completed",
+    "statusLabel": "已举办",
     "priority": "high",
     "desc": "8月12-14日，北京经开区，「1+6+N」架构含「助企出海」专场，海外侨胞与科创人才精准对接",
     "url": "https://kfqgw.beijing.gov.cn/ywdt/tt/cxfw/202607/t20260724_4783599.html",
@@ -735,5 +735,28 @@
     "month": 7,
     "day": 1,
     "id": 40
+  },
+  {
+    "title": "【活动报名】当前对外投资法律和海外知识产权风险及应对课堂",
+    "organizer": "京企走出去服务平台",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital",
+      "compliance",
+      "tax",
+      "general"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "【活动报名】当前对外投资法律和海外知识产权风险及应对课堂--京企海外综合服务信息平台 关于我们|微信 首页 政务信息 工作动态 通知公告 政策法规 惠企政策 税路通 常见问题 一图读懂 海外知识产权 资讯信息 业界动态 企业动态 国别动态 投资政策 营商环境 投资指南 风险预警 商旅指南 分析报告 数据统计 政务服务 境外投资 对外承包 对外劳务 对外援助 海外知识产权维权援助 金融服务 网上课堂 对外投资合作在外人员适应性培训课程 海外知识产权保护培训课程 “税路通”学堂 金融课程 其他课程 国别指南 国别（地区）指南 域外法律 国别（地区）投资税收指南 外事为民 专业服务 法律服务 会计",
+    "url": "https://beijing.investgo.cn/article/touchd/hdyg/202608/857198.html?channelId=144@cuId=53d8a7e49ff1cdda019ff3bc8ade0176",
+    "venue": "",
+    "registration": "详见活动链接",
+    "year": 2026,
+    "month": 8,
+    "day": 1,
+    "id": 41
   }
 ]
