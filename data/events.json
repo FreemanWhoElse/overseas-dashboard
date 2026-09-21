@@ -1015,5 +1015,25 @@
     "month": 9,
     "day": 12,
     "id": 53
+  },
+  {
+    "title": "综合出海动态",
+    "organizer": "京企走出去服务平台",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "general"
+    ],
+    "status": "upcoming",
+    "statusLabel": "即将举办",
+    "priority": "medium",
+    "desc": "",
+    "url": "https://beijing.investgo.cn/2026/overseas-news.shtml",
+    "venue": "",
+    "registration": "详见活动链接",
+    "year": 2026,
+    "month": 9,
+    "day": 21,
+    "id": 54
   }
 ]
