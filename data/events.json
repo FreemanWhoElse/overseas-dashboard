@@ -1055,5 +1055,46 @@
     "month": 9,
     "day": 24,
     "id": 55
+  },
+  {
+    "title": "2026年毕马威全球半导体行业展望",
+    "organizer": "毕马威中国 (KPMG)",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "digital",
+      "supply"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "!function(e,a,n,t){ if (a) return; var i=e.head;if(i){ var o=e.createElement(\"style\"); o.id=\"alloy-prehiding\",o.innerText=n,i.appendChild(o), setTimeout(function(){o.parentNode&&o.parentNode.removeChild(o)},t)}} (document, document.location.href.indexOf(\"adobe_authoring_enabled\") !== -1, \"body { op",
+    "url": "https://kpmg.com/cn/zh/insights/2026/10/global-semiconductor-industry-outlook-2026.html",
+    "venue": "",
+    "registration": "详见活动链接",
+    "year": 2026,
+    "month": 10,
+    "day": 9,
+    "id": 56
+  },
+  {
+    "title": "“安全筑基 护航出海”工程劳务企业海外安保实务沙龙在京举办 - 北京海外综合服务平台",
+    "organizer": "京企走出去服务平台",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "general"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "“安全筑基 护航出海”工程劳务企业海外安保实务沙龙在京举办 - 北京海外综合服务平台 .art-page .art-hd .sub-title { margin-top: 10px; text-align: center; color: #79879c; font-size: 16px; line-height: 1.5; } .art-page .art-bd .con p:empty { display: none; margin: 0; } .art-page .art-bd .con img { display: block; margin: 20px auto; max-width",
+    "url": "https://beijing.investgo.cn/article/touchd/hdbd/202610/867306.html?channelId=145@cuId=53d8a7e4a16497a701a167b58fce023f",
+    "venue": "",
+    "registration": "详见活动链接",
+    "year": 2026,
+    "month": 10,
+    "day": 23,
+    "id": 57
   }
 ]
