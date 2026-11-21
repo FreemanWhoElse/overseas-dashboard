@@ -1221,5 +1221,25 @@
     "month": 11,
     "day": 17,
     "id": 63
+  },
+  {
+    "title": "京港携手“双向合作助企出海” - 北京海外综合服务平台",
+    "organizer": "京企走出去服务平台",
+    "type": "forum",
+    "typeLabel": "论坛",
+    "topics": [
+      "general"
+    ],
+    "status": "completed",
+    "statusLabel": "已举办",
+    "priority": "medium",
+    "desc": "京港携手“双向合作助企出海” - 北京海外综合服务平台 .art-page .art-hd .sub-title { margin-top: 10px; text-align: center; color: #79879c; font-size: 16px; line-height: 1.5; } .art-page .art-bd .con p:empty { display: none; margin: 0; } .art-page .art-bd .con img { display: block; margin: 20px auto; max-width: 80%; height:",
+    "url": "https://beijing.investgo.cn/article/touchd/hdbd/202611/870675.html?channelId=145@cuId=53d8a7e4a1ea7d0601a1ed553a38022b",
+    "venue": "",
+    "registration": "详见活动链接",
+    "year": 2026,
+    "month": 11,
+    "day": 18,
+    "id": 64
   }
 ]
